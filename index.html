@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Técnico y Apuntes</title>
+    <style>
+        /* Estilos Generales y Reseteo */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Habilitar desplazamiento suave para los subtemas */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        /* Navegación Principal (Las 4 secciones arriba) */
+        nav {
+            background-color: #111827; 
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        nav button {
+            background-color: transparent;
+            color: #d1d5db;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: #2563eb; 
+            color: white;
+        }
+
+        /* Cabecera / Menú con imagen principal */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin-top: 15px;
+            color: #111827;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            min-height: 500px;
+        }
+
+        /* Ocultar secciones por defecto */
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        /* Mostrar sección activa */
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #2563eb;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* Galería de Imágenes (Sección 2) */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid #111827;
+        }
+
+        .gallery-item h3 {
+            margin-top: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* --- ESTILOS PARA LA SECCIÓN 3 (SUBTEMAS) --- */
+        
+        /* Menú interno de subtemas */
+        .submenu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .submenu a {
+            text-decoration: none;
+            background-color: #e2e8f0;
+            color: #1e293b;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .submenu a:hover {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        /* Contenedores de cada subtema */
+        .subtema-box {
+            margin-bottom: 40px;
+            padding-top: 20px; /* Espacio para que el ancla no quede pegada arriba */
+            border-top: 2px dashed #cbd5e1;
+        }
+
+        .subtema-box:first-of-type {
+            border-top: none;
+        }
+
+        .subtema-box h3 {
+            color: #1e293b;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subtema-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .subtema-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .subtema-img {
+            flex: 0 0 350px;
+            max-width: 100%;
+        }
+
+        .subtema-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Tablas Técnicas (Ideales para Bases de Datos) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Formulario (Sección 4) */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
+        }
+        button.submit-btn {
+            background-color: #2563eb; color: white; border: none; padding: 12px; 
+            font-size: 16px; cursor: pointer; border-radius: 5px; width: 100%;
+        }
+        button.submit-btn:hover { background-color: #1d4ed8; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navegación Principal -->
+    <nav>
+        <button class="tab-btn active" onclick="showSection('sec1')">Inicio del Proyecto</button>
+        <button class="tab-btn" onclick="showSection('sec2')">Galería Visual</button>
+        <button class="tab-btn" onclick="showSection('sec3')">Apuntes y Subtemas</button>
+        <button class="tab-btn" onclick="showSection('sec4')">Contacto</button>
+    </nav>
+
+    <!-- Cabecera -->
+    <header>
+        <img src="https://www.ionos.ca/digitalguide/fileadmin/_processed_/0/d/csm_html-tagst_b3a4c47b7f.webp" alt="Banner de Desarrollo">
+        <h1>Bitácora de Desarrollo Web</h1>
+    </header>
+
+    <div class="container">
+        
+        <!-- SECCIÓN 1: Inicio -->
+        <div id="sec1" class="section active">
+            <h2>Resumen del Desarrollo</h2>
+            <p>Este espacio documenta el trabajo de los últimos meses, enfocándose en la construcción de aplicaciones web limpias y estructuradas.</p>
+            <p>El objetivo principal ha sido integrar herramientas profesionales: desde la maquetación responsiva y dinámica, hasta la administración del servidor local con <strong>XAMPP</strong>, gestión estructurada de bases de datos y el despliegue de proyectos (como sistemas turísticos) en servidores gratuitos como <strong>InfinityFree</strong>.</p>
+        </div>
+
+        <!-- SECCIÓN 2: Galería -->
+        <div id="sec2" class="section">
+            <h2>Herramientas Utilizadas</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.DYS4qncHeBeS1lp8QUCurAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="VS Code">
+                    <h3>Editor Principal</h3>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn2.iconfinder.com/data/icons/pack1-baco-flurry-icons-style/512/XAMPP.png" alt="XAMPP">
+                    <h3>Servidor Local</h3>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.c4RBIyTHaeRH08T4bp_waAHaGO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Frameworks CSS">
+                    <h3>Diseño Responsivo</h3>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.Bk-rMtP9vgT-toHI8r5BqQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hosting">
+                    <h3>Hosting Web</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: Apuntes y Subtemas (LA SECCIÓN PRINCIPAL) -->
+        <div id="sec3" class="section">
+            <h2>Apuntes Técnicos Clasificados</h2>
+            
+            <!-- MENÚ DE SUBTEMAS (Anclas) -->
+            <div class="submenu">
+                <a href="#frontend">1. Frontend y CSS</a>
+                <a href="#backend">2. Arquitectura MVC (PHP)</a>
+                <a href="#basedatos">3. MySQL y Normalización</a>
+                <a href="#hosting">4. Despliegue</a>
+            </div>
+
+            <!-- SUBTEMA 1: Frontend -->
+            <div id="frontend" class="subtema-box">
+                <h3>🖥️ Frontend: Estructura y Estilos</h3>
+                <div class="subtema-content">
+                    <div class="subtema-text">
+                        <p>El desarrollo del lado del cliente se basa en tener un código HTML limpio y semántico. Para agilizar el diseño, en lugar de escribir CSS puro todo el tiempo, se integran frameworks como <strong>Tailwind CSS</strong> y <strong>Bootstrap</strong>.</p>
+                        <p><strong>JavaScript</strong> se utiliza para manipular el DOM, creando componentes interactivos como las pestañas de navegación de este mismo archivo.</p>
+                    </div>
+                    <div class="subtema-img">
+                        <img src="https://cdn.pixabay.com/photo/2018/08/12/13/54/code-3600810_1280.png">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTEMA 2: Backend y MVC -->
+            <div id="backend" class="subtema-box">
+                <h3>⚙️ Backend: PHP y Modelo-Vista-Controlador</h3>
+                <div class="subtema-content">
+                    <div class="subtema-text">
+                        <p>El uso de <strong>PHP</strong> se organiza bajo el patrón <strong>MVC</strong>, dividiendo el proyecto de forma lógica:</p>
+                        <ul>
+                            <li><strong>Modelo:</strong> Archivos que se conectan a MySQL y hacen las consultas (Select, Insert).</li>
+                            <li><strong>Vista:</strong> El HTML que ve el usuario final.</li>
+                            <li><strong>Controlador:</strong> El intermediario que recibe los datos, llama al modelo y envía la respuesta a la vista.</li>
+                        </ul>
+                    </div>
+                    <div class="subtema-img">
+                        <img src="https://th.bing.com/th/id/R.65638c1a4863a3514a7efe57394956d1?rik=hNEZz%2fAdFR5%2b6w&pid=ImgRaw&r=0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTEMA 3: Bases de Datos -->
+            <div id="basedatos" class="subtema-box">
+                <h3>🗄️ Diseño de Bases de Datos y Normalización</h3>
+                <div class="subtema-content">
+                    <div class="subtema-text">
+                        <p>Las bases de datos se diseñan usando diagramas Entidad-Relación (ER) en <strong>MySQL Workbench</strong> y se administran en <strong>phpMyAdmin</strong> vía XAMPP.</p>
+                        <p>Un punto crítico es la <strong>Normalización</strong> para mantener la integridad de los datos, por ejemplo en un sistema de Turismo Edomex:</p>
+                        
+                        <!-- Tabla técnica bien formateada -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fase</th>
+                                    <th>Regla Principal</th>
+                                    <th>Aplicación Práctica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1FN</strong></td>
+                                    <td>Datos atómicos</td>
+                                    <td>No tener múltiples municipios en una sola celda.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2FN</strong></td>
+                                    <td>Dependencia funcional completa</td>
+                                    <td>Separar datos del municipio de los datos del estado.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3FN</strong></td>
+                                    <td>Sin dependencias transitivas</td>
+                                    <td>Las tablas se relacionan estrictamente por Claves Foráneas (Foreign Keys).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="subtema-img">
+                        <img src="https://bookdown.org/paranedagarcia/database/images/db-cardinalidad.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTEMA 4: Hosting -->
+            <div id="hosting" class="subtema-box">
+                <h3>☁️ Despliegue en Servidor</h3>
+                <div class="subtema-content">
+                    <div class="subtema-text">
+                        <p>Una vez que el proyecto funciona en `localhost` usando XAMPP, el código se migra a un entorno de producción. Plataformas como <strong>InfinityFree</strong> permiten alojar los archivos PHP y exportar/importar la base de datos `.sql` para que el proyecto sea accesible desde cualquier dispositivo.</p>
+                    </div>
+                    <div class="subtema-img">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.Bk-rMtP9vgT-toHI8r5BqQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN 4: Contacto / Formulario -->
+        <div id="sec4" class="section">
+            <h2>Panel de Configuración / Contacto</h2>
+            <form onsubmit="enviarFormulario(event)">
+                <div class="form-group">
+                    <label for="nombre">Usuario / Administrador:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo de contacto:</label>
+                    <input type="email" id="correo" name="correo" placeholder="usuario@servidor.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Consulta sobre código o base de datos:</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Describe el error de MySQL, PHP o la duda de maquetación..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Ticket</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // Lógica de Pestañas Principales
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // Si cambias de pestaña, sube el scroll hasta arriba
+            window.scrollTo(0, 0);
+        }
+
+        // Simulación del Formulario
+        function enviarFormulario(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            alert('¡Datos registrados correctamente, ' + nombre + '! El formulario funciona a la perfección.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
